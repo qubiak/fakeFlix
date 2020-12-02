@@ -19,23 +19,23 @@ public class FilmDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void saveFilm (String title, String category, Date releaseDate) {
-        String sql = "INSERT INTO film (title, category, releaseDate) VALUE (?, ?, ?)";
-        jdbcTemplate.update(sql, new Object[]{title, category, releaseDate});
+    public void saveFilm (String title, String category, Date releaseDate, boolean premium) {
+        String sql = "INSERT INTO film (id, title, category, releaseDate, premium) VALUE (NULL, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, new Object[]{title, category, releaseDate, premium});
     }
 
-    public void delateFilmById (int id) {
-        String sql = "DELATE FROM film WHERE id = ?";
+    public void deleteFilmById (int id) {
+        String sql = "DELETE FROM film WHERE id = ?";
         jdbcTemplate.update(sql, new Object[]{id});
     }
 
-    public void editFilm (String title, String category, Date releaseDate) {
-        String sql = "UPDATE film (title, category, releaseDate) VALUE (?, ?, ?) WHERE id = ?";
-        jdbcTemplate.update(sql, title, category, releaseDate);
+    public void editFilm (String title, String category, Date releaseDate, boolean premium) {
+        String sql = "UPDATE film (title, category, releaseDate, premium) VALUE (?, ?, ?, ?) WHERE id = ?";
+        jdbcTemplate.update(sql, title, category, releaseDate, premium);
     }
 
     public List<FilmModel> showEveryFilms() {
-        String sql ="SHOW * FROM film";
+        String sql ="SELECT * FROM film";
         List<FilmModel> films = jdbcTemplate.query(sql, new FilmRowMapper());
         return films;
     }
@@ -52,5 +52,9 @@ public class FilmDao {
         return films;
     }
 
-
+    public List<FilmModel> filmForStandardUser() {
+        String sql = "SELECT * FROM film WHERE premium = false";
+        List<FilmModel> filmsStandard = jdbcTemplate.query(sql, new FilmRowMapper());
+        return filmsStandard;
+    }
 }

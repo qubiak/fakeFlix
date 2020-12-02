@@ -5,14 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.qubiak.netflixuser.Client.Model.Movie;
 import pl.qubiak.netflixuser.Dao.User.UserDao;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Controller
 @RequestMapping("/User")
-public class UserController {
+public class UserController<movie> {
 
     final LocalDate today = LocalDate.now();
     final LocalDate plus30Days = today.plusDays(30);
@@ -42,4 +44,5 @@ public class UserController {
             @RequestParam("id") int id) {
         userDao.addSubscrypcion(plus30DaysDate, id);
     }
+
 }

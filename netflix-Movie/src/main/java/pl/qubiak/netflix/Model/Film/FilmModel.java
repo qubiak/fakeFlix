@@ -13,6 +13,7 @@ public class FilmModel {
     private String title;
     private String category;
     private Date releaseDate;
+    private boolean permium;
 
     public int getId() {
         return id;
@@ -44,5 +45,13 @@ public class FilmModel {
 
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public boolean isPermium() {
+        return permium;
+    }
+
+    public void setPermium(boolean permium) {
+        this.permium = permium;
     }
 }

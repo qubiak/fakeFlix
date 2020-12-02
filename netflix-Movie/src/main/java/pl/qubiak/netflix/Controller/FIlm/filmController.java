@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pl.qubiak.netflix.Dao.Film.FilmDao;
 import pl.qubiak.netflix.Model.Film.FilmModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 @Controller
 @RequestMapping("/Film")
@@ -23,15 +26,21 @@ public class filmController {
     public void saveFilm(
             @RequestParam("title") String title,
             @RequestParam("category") String category,
-            @RequestParam("releaseDate")Date releaseDate) {
-        filmDao.saveFilm(title, category, releaseDate);
+            @RequestParam("date")String date,
+            @RequestParam("premium")boolean premium) throws ParseException {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC+1"));
+        Date releaseDate = formatter.parse(date);
+
+        filmDao.saveFilm(title, category, releaseDate, premium);
     }
 
-    @RequestMapping("/delateFilmById")
+    @RequestMapping("/deleteFilmById")
     @ResponseBody
-    public void delateFilmById(
+    public void deleteFilmById(
             @RequestParam("id") int id) {
-        filmDao.delateFilmById(id);
+        filmDao.deleteFilmById(id);
     }
 
     @RequestMapping("/editFilm")
@@ -39,8 +48,14 @@ public class filmController {
     public void editFilm(
             @RequestParam("title") String title,
             @RequestParam("category") String category,
-            @RequestParam("releaseDate")Date releaseDate) {
-        filmDao.editFilm(title, category, releaseDate);
+            @RequestParam("date")String date,
+            @RequestParam("premium")boolean premium) throws ParseException {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC+1"));
+        Date releaseDate = formatter.parse(date);
+
+        filmDao.editFilm(title, category, releaseDate, premium);
     }
 
     @RequestMapping("/showEveryFilms")
@@ -60,4 +75,8 @@ public class filmController {
     public List<FilmModel> filmsAfterPremiere() {
         return filmDao.filmsAfterPremiere();
     }
+
+    @RequestMapping("/filmsForStandardUser")
+    @ResponseBody
+    public List<FilmModel> filmsForStandardUser() { return filmDao.filmForStandardUser();}
 }

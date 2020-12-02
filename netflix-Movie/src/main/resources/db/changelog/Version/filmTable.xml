@@ -12,6 +12,7 @@
             <column name="title" type="varchar(255)"/>
             <column name="category" type="varchar(255)"/>
             <column name="releaseDate" type="DATE"/>
+            <column name="premium" type="boolean"/>
         </createTable>
     </changeSet>
 

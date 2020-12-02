@@ -17,7 +17,8 @@ public class FilmRowMapper implements RowMapper<FilmModel> {
         film.setId(resultSet.getInt("id"));
         film.setTitle(resultSet.getString("title"));
         film.setCategory(resultSet.getString("category"));
-        film.setReleaseDate(resultSet.getDate("releaseDare"));
+        film.setReleaseDate(resultSet.getDate("releaseDate"));
+        film.setPermium(resultSet.getBoolean("premium"));
 
         return film;
     }
