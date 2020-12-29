@@ -1,4 +1,4 @@
-package pl.qubiak.netflixuser.Model.User;
+package pl.qubiak.netflixuser.Model;
 
 import io.swagger.annotations.ApiModelProperty;
 

@@ -1,7 +1,7 @@
-package pl.qubiak.netflixuser.Client.RestClient;
+package pl.qubiak.netflix.Client.RestClient;
 
 import com.google.gson.Gson;
-import pl.qubiak.netflixuser.Client.Model.Movie;
+import pl.qubiak.netflix.Client.Model.Movie;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

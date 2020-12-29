@@ -1,12 +1,12 @@
-package pl.qubiak.netflix.Controller.FIlm;
+package pl.qubiak.netflix.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pl.qubiak.netflix.Dao.Film.FilmDao;
-import pl.qubiak.netflix.Model.Film.FilmModel;
+import pl.qubiak.netflix.Dao.FilmDao;
+import pl.qubiak.netflix.Model.FilmModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

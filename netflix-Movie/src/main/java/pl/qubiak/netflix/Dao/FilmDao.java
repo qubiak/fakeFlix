@@ -1,10 +1,10 @@
-package pl.qubiak.netflix.Dao.Film;
+package pl.qubiak.netflix.Dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import pl.qubiak.netflix.Model.Film.FilmModel;
-import pl.qubiak.netflix.RowMapper.Film.FilmRowMapper;
+import pl.qubiak.netflix.Model.FilmModel;
+import pl.qubiak.netflix.RowMapper.FilmRowMapper;
 
 import java.util.Date;
 import java.util.List;

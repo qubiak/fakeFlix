@@ -1,7 +1,7 @@
-package pl.qubiak.netflixuser.RowMapper.User;
+package pl.qubiak.netflixuser.RowMapper;
 
 import org.springframework.jdbc.core.RowMapper;
-import pl.qubiak.netflixuser.Model.User.UserModel;
+import pl.qubiak.netflixuser.Model.UserModel;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

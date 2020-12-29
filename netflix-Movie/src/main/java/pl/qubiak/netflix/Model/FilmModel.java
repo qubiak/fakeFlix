@@ -1,4 +1,4 @@
-package pl.qubiak.netflix.Model.Film;
+package pl.qubiak.netflix.Model;
 
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.annotation.Id;

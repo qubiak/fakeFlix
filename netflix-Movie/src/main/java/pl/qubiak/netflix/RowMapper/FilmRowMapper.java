@@ -1,8 +1,8 @@
-package pl.qubiak.netflix.RowMapper.Film;
+package pl.qubiak.netflix.RowMapper;
 
 
 import org.springframework.jdbc.core.RowMapper;
-import pl.qubiak.netflix.Model.Film.FilmModel;
+import pl.qubiak.netflix.Model.FilmModel;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

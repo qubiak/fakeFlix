@@ -1,10 +1,9 @@
-package pl.qubiak.netflixuser.Dao.User;
+package pl.qubiak.netflixuser.Dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import pl.qubiak.netflixuser.Model.User.UserModel;
-import pl.qubiak.netflixuser.RowMapper.User.UserRowMapper;
+import pl.qubiak.netflixuser.RowMapper.UserRowMapper;
 
 import java.util.List;
 import java.util.Map;
@@ -40,15 +39,6 @@ public class UserDao {
         List<Map<String, Object>> user = jdbcTemplate.queryForList(sql, new UserRowMapper());
         return user;
 
-        /*
-        Dobra chciałem zrobić cos takiego jak:
-        - pobrać Usera
-        - sprawdzić end_Of_Subscripcion_Date
-        - jeżeli end_Of_Subscripcion_Date > CIRRENT_DATE to:
-        - wypisać premiumMovie
-        - jeżeli ! (end_Of_Subscripcion_Date > CIRRENT_DATE) to:
-        - wypisać standardMovie
-         */
     }
 
 }
