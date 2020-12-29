@@ -1,4 +1,4 @@
-package pl.qubiak.netflixuser.Client.Model;
+package pl.qubiak.netflix.Client.Model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
