@@ -3,6 +3,7 @@ package pl.qubiak.netflixuser.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import pl.qubiak.netflixuser.Model.UserModel;
 import pl.qubiak.netflixuser.RowMapper.UserRowMapper;
 
 import java.util.List;
@@ -29,16 +30,21 @@ public class UserDao {
         jdbcTemplate.update(sql, new Object[]{id});
     }
 
-    public void addSubscrypcion(String plus30DaysDate, int id){
+    public void addSubscrypcion(String todayPlusSubscripcionLengthDate, int id){
         String sql ="UPDATE user SET end_Of_Subscripcion_Date = ? where ID = ?";
-        jdbcTemplate.update(sql, plus30DaysDate, id);
+        jdbcTemplate.update(sql, todayPlusSubscripcionLengthDate, id);
     }
 
     public List<Map<String, Object>> showUserById(int id) {
         String sql = "SELECT * FROM user WHERE id = ?";
         List<Map<String, Object>> user = jdbcTemplate.queryForList(sql, new UserRowMapper());
         return user;
+    }
 
+    public List<UserModel> readSubscrypcionDate(int id) {
+        String sql = "SELECT end_Of_Subscripcion_Date FROM user where ID = '?'";
+        List<UserModel> date = jdbcTemplate.query(sql, new UserRowMapper());
+        return date;
     }
 
 }

@@ -6,22 +6,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.qubiak.netflixuser.Dao.UserDao;
+import pl.qubiak.netflixuser.Model.UserModel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/User")
-public class UserController<movie> {
-
-    final LocalDate today = LocalDate.now();
-    final LocalDate plus30Days = today.plusDays(30);
-    String plus30DaysDate = plus30Days.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+public class UserController {
 
     @Autowired
     private UserDao userDao;
-
-
 
     @RequestMapping("/saveUser")
     @ResponseBody
@@ -41,8 +38,37 @@ public class UserController<movie> {
     @RequestMapping("/addSubscryption")
     @ResponseBody
     public void addSubscryption(
-            @RequestParam("id") int id) {
-        userDao.addSubscrypcion(plus30DaysDate, id);
+            @RequestParam("id") int id,
+            @RequestParam("subscriptionLength") int subscriptionLength) {
+        final LocalDate today = LocalDate.now();
+        final LocalDate todayPlusSubscripcionLength = today.plusDays(subscriptionLength);
+        String todayPlusSubscripcionLengthDate = todayPlusSubscripcionLength.format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+        userDao.addSubscrypcion(todayPlusSubscripcionLengthDate, id);
     }
 
+    @RequestMapping("/subscriptionStatus")
+    @ResponseBody
+    public String subscriptionStatus(
+            @RequestParam("id") int id) {
+        List<UserModel> date = userDao.readSubscrypcionDate(id);
+
+
+        //       if (data.after(new Date())) {
+        //           return "do końca subsktypcji pozostało" + (data - new Date()) + "dni";
+        //       }
+        //       else
+        //           return "okres subskrypcji zakończył się z dniem: " + data;
+        //   }
+
+        return "test" + date;
+
+        //powiedz mi jeszcze czemu tu dostaję pustą date. Wynik tego returna to "test[]"
+
+//
+//    public List<pl.qubiak.netflix.Model.FilmModel> premiumMovieList(
+//            @RequestParam("id") int id) {
+//
+//    }
+
+    }
 }
