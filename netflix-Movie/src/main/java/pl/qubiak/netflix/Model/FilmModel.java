@@ -1,7 +1,8 @@
 package pl.qubiak.netflix.Model;
 
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.data.annotation.Id;
+import nonapi.io.github.classgraph.json.Id;
+
 
 import java.util.Date;
 

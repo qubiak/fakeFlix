@@ -6,12 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.qubiak.netflixuser.Dao.UserDao;
-import pl.qubiak.netflixuser.Model.UserModel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping("/User")
@@ -50,25 +48,18 @@ public class UserController {
     @ResponseBody
     public String subscriptionStatus(
             @RequestParam("id") int id) {
-        List<UserModel> date = userDao.readSubscrypcionDate(id);
+        Date date = userDao.subscriptionStatus(id);
 
-
-        //       if (data.after(new Date())) {
-        //           return "do końca subsktypcji pozostało" + (data - new Date()) + "dni";
-        //       }
-        //       else
-        //           return "okres subskrypcji zakończył się z dniem: " + data;
-        //   }
-
-        return "test" + date;
-
-        //powiedz mi jeszcze czemu tu dostaję pustą date. Wynik tego returna to "test[]"
+        if (date.after(new Date())) {
+            return "Your subscription lasts until " + date.toString();
+        }
+        else
+            return "subscription period ended";
+    }
 
 //
 //    public List<pl.qubiak.netflix.Model.FilmModel> premiumMovieList(
 //            @RequestParam("id") int id) {
 //
-//    }
 
-    }
 }

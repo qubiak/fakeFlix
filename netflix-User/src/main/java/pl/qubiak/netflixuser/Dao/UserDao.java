@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import pl.qubiak.netflixuser.Model.UserModel;
 import pl.qubiak.netflixuser.RowMapper.UserRowMapper;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -41,10 +42,10 @@ public class UserDao {
         return user;
     }
 
-    public List<UserModel> readSubscrypcionDate(int id) {
-        String sql = "SELECT end_Of_Subscripcion_Date FROM user where ID = '?'";
-        List<UserModel> date = jdbcTemplate.query(sql, new UserRowMapper());
-        return date;
+    public Date subscriptionStatus(int id) {
+        String sql = "SELECT * FROM user WHERE id = ?";
+        UserModel subscriptionStatus = jdbcTemplate.queryForObject(sql ,new Object[]{id}, new UserRowMapper());
+        return subscriptionStatus.getEndOfSubscripcionDate();
     }
 
 }

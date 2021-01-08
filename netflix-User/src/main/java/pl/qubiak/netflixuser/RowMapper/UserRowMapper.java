@@ -8,12 +8,13 @@ import java.sql.SQLException;
 
 public class UserRowMapper implements RowMapper<UserModel> {
 
+
     @Override
     public UserModel mapRow(ResultSet resultSet, int i) throws SQLException {
         UserModel userModel = new UserModel();
         userModel.setId(resultSet.getInt("id"));
-        userModel.getUserName(resultSet.getString("userName"));
-        userModel.getEndOfSubscripcionDate(resultSet.getDate("endOfSubscripcionDate"));
+        userModel.setUserName(resultSet.getString("user_Name"));
+        userModel.setEndOfSubscripcionDate(resultSet.getDate("end_Of_Subscripcion_Date"));
 
         return userModel;
     }

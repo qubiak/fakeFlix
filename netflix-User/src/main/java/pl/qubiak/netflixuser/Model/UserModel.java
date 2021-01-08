@@ -27,11 +27,12 @@ public class UserModel {
         this.userName = userName;
     }
 
-    public Date getEndOfSubscripcionDate(java.sql.Date endOfSubscripcionDate) {
+    public Date getEndOfSubscripcionDate() {
         return this.endOfSubscripcionDate;
     }
 
     public void setEndOfSubscripcionDate(Date endOfSubscripcionDate) {
         this.endOfSubscripcionDate = endOfSubscripcionDate;
     }
+
 }
