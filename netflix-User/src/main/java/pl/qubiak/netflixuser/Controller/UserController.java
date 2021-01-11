@@ -1,15 +1,19 @@
 package pl.qubiak.netflixuser.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.qubiak.netflix.Client.RestClient.StandardUser;
+import pl.qubiak.netflix.Model.FilmModel;
 import pl.qubiak.netflixuser.Dao.UserDao;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/User")
@@ -48,18 +52,29 @@ public class UserController {
     @ResponseBody
     public String subscriptionStatus(
             @RequestParam("id") int id) {
-        Date date = userDao.subscriptionStatus(id);
+        try {
+            Date date = userDao.subscriptionStatus(id);
 
-        if (date.after(new Date())) {
-            return "Your subscription lasts until " + date.toString();
+            if (date.after(new Date())) {
+                return "Your subscription lasts until " + date.toString();
+            } else
+                return "subscription period ended";
+        } catch (EmptyResultDataAccessException e) {
+            return "ERROR!! No user with ID: " + id;
         }
-        else
-            return "subscription period ended";
     }
 
-//
-//    public List<pl.qubiak.netflix.Model.FilmModel> premiumMovieList(
-//            @RequestParam("id") int id) {
-//
+    @RequestMapping("/test")
+    @ResponseBody
+    public List<FilmModel> movieList(
+            @RequestParam("id") int id) {
 
+        Date date = userDao.subscriptionStatus(id);
+        if (date.after(new Date())) {
+            return  // PremiumUser
+        } else 
+            return //StandardUser
+    }
+
+    // Jak tutaj w metodzie odnieść się do RestClienta i tamtejszego Endpointa?
 }

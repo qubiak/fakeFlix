@@ -47,5 +47,4 @@ public class UserDao {
         UserModel subscriptionStatus = jdbcTemplate.queryForObject(sql ,new Object[]{id}, new UserRowMapper());
         return subscriptionStatus.getEndOfSubscripcionDate();
     }
-
 }
