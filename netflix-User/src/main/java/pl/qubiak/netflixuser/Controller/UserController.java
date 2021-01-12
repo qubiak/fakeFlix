@@ -6,14 +6,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pl.qubiak.netflix.Client.RestClient.StandardUser;
+
+import pl.qubiak.netflix.Client.RestClient.MovieClient;
 import pl.qubiak.netflix.Model.FilmModel;
 import pl.qubiak.netflixuser.Dao.UserDao;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+
+import static pl.qubiak.netflix.Client.RestClient.MovieClient.showEveryFilms;
+
 
 @Controller
 @RequestMapping("/User")
@@ -21,6 +26,7 @@ public class UserController {
 
     @Autowired
     private UserDao userDao;
+    private List<FilmModel> MovieClientTest;
 
     @RequestMapping("/saveUser")
     @ResponseBody
@@ -66,15 +72,14 @@ public class UserController {
 
     @RequestMapping("/test")
     @ResponseBody
-    public List<FilmModel> movieList(
-            @RequestParam("id") int id) {
+    public List movieList(
+            @RequestParam("id") int id) throws IOException {
 
         Date date = userDao.subscriptionStatus(id);
         if (date.after(new Date())) {
-            return  // PremiumUser
-        } else 
-            return //StandardUser
+            return MovieClient.showEveryFilms(); // PremiumUser
+        } else
+            return MovieClient.showEveryFilms();//StandardUser
     }
 
-    // Jak tutaj w metodzie odnieść się do RestClienta i tamtejszego Endpointa?
 }
