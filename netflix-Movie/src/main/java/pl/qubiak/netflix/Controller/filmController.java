@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import pl.qubiak.netflix.Client.RestClient.MovieClient;
 import pl.qubiak.netflix.Dao.FilmDao;
 import pl.qubiak.netflix.Model.FilmModel;
 

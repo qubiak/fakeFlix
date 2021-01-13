@@ -7,17 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import pl.qubiak.netflix.Client.RestClient.MovieClient;
+import pl.qubiak.netflix.Client.RestClient.FutureFilms;
+import pl.qubiak.netflix.Client.RestClient.PremiumMovieClient;
+import pl.qubiak.netflix.Client.RestClient.StandardMovieClient;
+import pl.qubiak.netflix.Client.RestClient.Test;
 import pl.qubiak.netflix.Model.FilmModel;
 import pl.qubiak.netflixuser.Dao.UserDao;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import static pl.qubiak.netflix.Client.RestClient.MovieClient.showEveryFilms;
 
 
 @Controller
@@ -70,16 +73,36 @@ public class UserController {
         }
     }
 
-    @RequestMapping("/test")
+    @RequestMapping("/movieList")
     @ResponseBody
-    public List movieList(
-            @RequestParam("id") int id) throws IOException {
-
-        Date date = userDao.subscriptionStatus(id);
-        if (date.after(new Date())) {
-            return MovieClient.showEveryFilms(); // PremiumUser
-        } else
-            return MovieClient.showEveryFilms();//StandardUser
+    public List<FilmModel> movieList(
+            @RequestParam("id") int id) {
+        try {
+            Date date = userDao.subscriptionStatus(id);
+            if (date.after(new Date())) {
+                PremiumMovieClient premiumClient = new PremiumMovieClient();
+                return premiumClient.showEveryFilms();
+            } else {
+                StandardMovieClient standardClient = new StandardMovieClient();
+                return standardClient.showStandardFilms();
+            }
+        } catch (EmptyResultDataAccessException e) {
+            System.out.println("ERROR!! No user with ID: " + id);
+            return new ArrayList<>();
+        }
     }
 
+    @RequestMapping("/FutureFilms")
+    @ResponseBody
+    public List<FilmModel> futureFilm() {
+        FutureFilms futureFilms = new FutureFilms();
+        return futureFilms.showFutureFilms();
+    }
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public List test() {
+        Test test = new Test();
+        return test.getUrlTest();
+    }
 }

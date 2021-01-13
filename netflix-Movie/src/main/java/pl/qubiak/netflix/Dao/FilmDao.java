@@ -41,13 +41,13 @@ public class FilmDao {
     }
 
     public List<FilmModel> filmsBeforePremiere() {
-        String sql ="SELECT * FROM film WHERE releaseDate < CURRENT_DATE";
+        String sql ="SELECT * FROM film WHERE releaseDate > CURRENT_DATE";
         List<FilmModel> films = jdbcTemplate.query(sql, new FilmRowMapper());
         return films;
     }
 
     public List<FilmModel> filmsAfterPremiere() {
-        String sql = "SELECT * FROM film WHERE releaseDate > CURRENT_DATE";
+        String sql = "SELECT * FROM film WHERE releaseDate < CURRENT_DATE";
         List<FilmModel> films = jdbcTemplate.query(sql, new FilmRowMapper());
         return films;
     }
