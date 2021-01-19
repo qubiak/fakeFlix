@@ -60,23 +60,23 @@ public class filmController {
 
     @RequestMapping("/showEveryFilms")
     @ResponseBody
-    public List<FilmModel> showEveryFilms() {
+    public List<FilmModel> getEveryFilms() {
         return filmDao.showEveryFilms();
     }
 
     @RequestMapping("/filmsBeforePremiere")
     @ResponseBody
-    public List<FilmModel> filmsBeforePremiere() {
+    public List<FilmModel> getFilmsBeforePremiere() {
         return filmDao.filmsBeforePremiere();
     }
 
     @RequestMapping("/filmsAfterPremiere")
     @ResponseBody
-    public List<FilmModel> filmsAfterPremiere() {
+    public List<FilmModel> getFilmsAfterPremiere() {
         return filmDao.filmsAfterPremiere();
     }
 
     @RequestMapping("/filmsForStandardUser")
     @ResponseBody
-    public List<FilmModel> filmsForStandardUser() { return filmDao.filmForStandardUser();}
+    public List<FilmModel> getFilmsForStandardUser() { return filmDao.filmForStandardUser();}
 }

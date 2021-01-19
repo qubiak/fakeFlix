@@ -7,18 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import pl.qubiak.netflix.Client.RestClient.FutureFilms;
-import pl.qubiak.netflix.Client.RestClient.PremiumMovieClient;
-import pl.qubiak.netflix.Client.RestClient.StandardMovieClient;
-import pl.qubiak.netflix.Client.RestClient.Test;
+import pl.qubiak.netflix.Client.RestClient.NetflixMovieClient;
 import pl.qubiak.netflix.Model.FilmModel;
 import pl.qubiak.netflixuser.Dao.UserDao;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +21,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/User")
 public class UserController {
+
+    NetflixMovieClient client = new NetflixMovieClient();
 
     @Autowired
     private UserDao userDao;
@@ -59,7 +56,7 @@ public class UserController {
 
     @RequestMapping("/subscriptionStatus")
     @ResponseBody
-    public String subscriptionStatus(
+    public String getSubscriptionStatus(
             @RequestParam("id") int id) {
         try {
             Date date = userDao.subscriptionStatus(id);
@@ -75,16 +72,15 @@ public class UserController {
 
     @RequestMapping("/movieList")
     @ResponseBody
-    public List<FilmModel> movieList(
+    public List<FilmModel> getMovieList(
             @RequestParam("id") int id) {
         try {
             Date date = userDao.subscriptionStatus(id);
+
             if (date.after(new Date())) {
-                PremiumMovieClient premiumClient = new PremiumMovieClient();
-                return premiumClient.showEveryFilms();
+                return client.showEveryFilms();
             } else {
-                StandardMovieClient standardClient = new StandardMovieClient();
-                return standardClient.showStandardFilms();
+                return client.showStandardFilms();
             }
         } catch (EmptyResultDataAccessException e) {
             System.out.println("ERROR!! No user with ID: " + id);
@@ -94,15 +90,8 @@ public class UserController {
 
     @RequestMapping("/FutureFilms")
     @ResponseBody
-    public List<FilmModel> futureFilm() {
-        FutureFilms futureFilms = new FutureFilms();
-        return futureFilms.showFutureFilms();
+    public List<FilmModel> getFutureFilm() {
+        return client.showFutureFilms();
     }
 
-    @RequestMapping("/test")
-    @ResponseBody
-    public List test() {
-        Test test = new Test();
-        return test.getUrlTest();
-    }
 }
