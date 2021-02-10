@@ -23,11 +23,14 @@ public class Config {
     @Value("${url}")
     private String url;
 
+    @Value("${username}")
+    private String username;
+
     @Bean
     public DataSource getDataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.url(url);
-        dataSourceBuilder.username("root");
+        dataSourceBuilder.username(username);
         dataSourceBuilder.password(password);
         dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
         return dataSourceBuilder.build();

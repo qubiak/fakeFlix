@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ConnectionMovieList {
 
-    public static Object connectionToMovie(String urlEnds) {
+    public static List<FilmModel> connectionToMovie(String urlEnds) {
 
         try {
 

@@ -12,25 +12,25 @@ public class NetflixMovieClient {
     public List<FilmModel> showEveryFilms() {
 
         String urlEnds = "Film/showEveryFilms";
-        ConnectionMovieList.connectionToMovie(urlEnds);
+        List<FilmModel> con = ConnectionMovieList.connectionToMovie(urlEnds);
 
-        return new ArrayList(Collections.singleton(ConnectionMovieList.connectionToMovie(urlEnds)));
+        return new ArrayList(Collections.singleton(con));
     }
 
     public List<FilmModel> showStandardFilms() {
 
         String urlEnds = "Film/filmsForStandardUser";
-        ConnectionMovieList.connectionToMovie(urlEnds);
+        List<FilmModel> con = ConnectionMovieList.connectionToMovie(urlEnds);
 
-        return new ArrayList(Collections.singleton(ConnectionMovieList.connectionToMovie(urlEnds)));
+        return new ArrayList(Collections.singleton(con));
     }
 
     public List<FilmModel> showFutureFilms() {
 
         String urlEnds = "Film/filmsBeforePremiere";
-        ConnectionMovieList.connectionToMovie(urlEnds);
+        List<FilmModel> con = ConnectionMovieList.connectionToMovie(urlEnds);
 
-        return new ArrayList(Collections.singleton(ConnectionMovieList.connectionToMovie(urlEnds)));
+        return new ArrayList(Collections.singleton(con));
     }
 
 }
